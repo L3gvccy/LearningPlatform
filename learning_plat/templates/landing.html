@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row d-flex align-items-center justify-content-around" style="min-height: calc(100vh - 72px);">
+        <div class="col-md-5">
+            <h1 class="display-4">Розумний майданчик для навчання <br><span class="text-cyan fw-normal">Learn<span class="text-aquagreen">X</span></span></h1>
+            <p class="lead">Платформа, що об'єднує викладачів та студентів для ефективного навчання.</p>
+            <a href="" class="btn btn-outline-aquagreen rounded-pill px-5"><h4 class="mb-0">ПРИЄДНАТИСЬ</h4></a>
+        </div>
+        <div class="col-md-5">
+            <img src="{% static 'img/main.png' %}" alt="" class="img-fluid w-100">
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-around text-center mb-5">
+        <div class="col-md-3 rounded-4 px-3 py-4 justify-content-around border border-2 shadow-lg">
+            <img src="{% static 'img/pic1.png' %}" alt="" class="bg-cyan img-fluid w-50 rounded-circle mb-4">
+            <h4 class="mb-4">Інтерактивне навчання</h4>
+            <p class="mb-0">Навчайся цікаво! Відеоуроки, тести допомагають краще засвоювати знання.</p>
+        </div>
+        <div class="col-md-3 rounded-4 px-3 py-4 justify-content-around border border-2 shadow-lg">
+            <img src="{% static 'img/pic2.png' %}" alt="" class="bg-cyan img-fluid w-50 rounded-circle mb-4">
+            <h4 class="mb-4">Доступ з будь-якого пристрою</h4>
+            <p class="mb-0">Телефон, планшет чи ноутбук — навчайся коли зручно, де зручно. Твій прогрес завжди з тобою.</p>
+        </div>
+        <div class="col-md-3 rounded-4 px-3 py-4 justify-content-around border border-2 shadow-lg">
+            <img src="{% static 'img/pic3.png' %}" alt="" class="bg-cyan img-fluid w-50 rounded-circle mb-4">
+            <h4 class="mb-4">Цифровий прогрес студентів</h4>
+            <p class="mb-0">Студенти можуть відслідковувати свій прогрес у реальному часі</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
