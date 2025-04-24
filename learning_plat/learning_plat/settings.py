@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'learning_plat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'LearningPlatform',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://oleksandriv:oleksandriv@maydanchikcluster.b5vfkr8.mongodb.net/?retryWrites=true&w=majority&appName=MaydanchikCluster'
+        },
+
     }
 }
 
