@@ -62,6 +62,30 @@
             </div>
         </div>
     </nav>
+
+    <div class="toast-container position-fixed top-2 end-0 p-3" style="z-index: 1100;">
+        {% for message in messages %}
+        <div class="toast align-items-center 
+          {% if message.tags == 'success' %}
+            bg-success
+          {% elif message.tags == 'error' %}
+            bg-danger
+          {% elif message.tags == 'warning' %}
+            bg-warning
+          {% else %}
+            bg-info
+          {% endif %}
+          text-white border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">
+                {{ message }}
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
     {% block content %}
     {% endblock %}
 
