@@ -1,7 +1,8 @@
 from django.urls import path, include
-from accounts.views import landing_page
+from accounts.views import logout, register_student, login
 
 urlpatterns = [
-    path('', landing_page, name='landing_page'),
-    path('register/', landing_page, name='landing_page'), 
+    path('register/', register_student, name='register_student'), 
+    path('login/', login, name='login'), 
+    path('logout/', logout, name="logout")
 ]

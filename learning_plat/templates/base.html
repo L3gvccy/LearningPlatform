@@ -12,13 +12,13 @@
         }
     </style>
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-md bg-light shadow-sm sticky-top py-3">
         <div class="container">
             <!-- Лівий блок з логотипом -->
             <div class="d-flex align-items-center">
-                <a href="#"><img src="{% static 'img/logo.png' %}" alt="Logo" style="max-width: 36px;"></a>
-                <a class="h3 text-decoration-none text-dark mb-0 ms-2" href="#">LearnX</a>
+                <a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo" style="max-width: 36px;"></a>
+                <a class="h3 text-decoration-none text-dark mb-0 ms-2" href="/">LearnX</a>
             </div>
     
             <!-- Кнопка для мобільного меню -->
@@ -29,6 +29,7 @@
             <!-- Центр та правий блок -->
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <!-- Центр: меню -->
+                {% if user.is_authenticated %}
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-2">
                         <a class="nav-link text-aquagreen fw-bold" href="#">Головна</a>
@@ -40,9 +41,10 @@
                         <a class="nav-link" href="#">Завдання</a>
                     </li>
                 </ul>
+                {% endif %}
     
                 <!-- Правий блок з кнопками -->
-                <ul class="navbar-nav d-flex">
+                <ul class="navbar-nav d-flex {% if user.is_authenticated %} {% else %} ms-auto {% endif %}">
                     {% if user.is_authenticated %}
                     <a href="#" class="btn nav-item nav-link align-items-center d-flex me-2 bg-aquagreen justify-content-center rounded-pill" style="width: 36px; height: 36px;">
                         <img src="{% static 'img/plus.png' %}" alt="" style="max-width: 22px;">
@@ -55,13 +57,13 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-light">
               
                             <li><a class="dropdown-item" href="/account/login/">Профіль</a></li>
-                            <li><a class="dropdown-item" href="/account/register/">Вийти</a></li>
+                            <li><a class="dropdown-item" href="/account/logout/">Вийти</a></li>
               
                         </ul>
                     </div>
                     {% else %}
                         <a href="/account/register/" class="btn btn-outline-aquagreen px-3 rounded-pill">Зареєструватись</a>
-                        <a href="/account/register/" class="btn btn-aquagreen px-3 ms-2 rounded-pill">Увійти</a>
+                        <a href="/account/login/" class="btn btn-aquagreen px-3 ms-2 rounded-pill">Увійти</a>
                     {% endif %}
                     
                 </ul>
@@ -94,6 +96,12 @@
 
     {% block content %}
     {% endblock %}
+
+    <footer class="bg-white text-center py-3 mt-auto border-top shadow-md">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 LearnX KNU. Усі права захищені.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
