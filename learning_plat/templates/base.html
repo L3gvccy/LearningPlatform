@@ -43,7 +43,8 @@
     
                 <!-- Правий блок з кнопками -->
                 <ul class="navbar-nav d-flex">
-                    <a href="#" class="btn nav-item nav-link align-items-center d-flex me-2 bg-aquagreen justify-content-around rounded-pill" style="width: 36px; height: 36px;">
+                    {% if user.is_authenticated %}
+                    <a href="#" class="btn nav-item nav-link align-items-center d-flex me-2 bg-aquagreen justify-content-center rounded-pill" style="width: 36px; height: 36px;">
                         <img src="{% static 'img/plus.png' %}" alt="" style="max-width: 22px;">
                     </a>
 
@@ -53,11 +54,16 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-light">
               
-                            <li><a class="dropdown-item" href="/account/login/">Увійти</a></li>
-                            <li><a class="dropdown-item" href="/account/register/">Реєстрація</a></li>
+                            <li><a class="dropdown-item" href="/account/login/">Профіль</a></li>
+                            <li><a class="dropdown-item" href="/account/register/">Вийти</a></li>
               
                         </ul>
                     </div>
+                    {% else %}
+                        <a href="/account/register/" class="btn btn-outline-aquagreen px-3 rounded-pill">Зареєструватись</a>
+                        <a href="/account/register/" class="btn btn-aquagreen px-3 ms-2 rounded-pill">Увійти</a>
+                    {% endif %}
+                    
                 </ul>
             </div>
         </div>
