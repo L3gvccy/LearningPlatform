@@ -46,16 +46,25 @@
                 <!-- Правий блок з кнопками -->
                 <ul class="navbar-nav d-flex {% if user.is_authenticated %} {% else %} ms-auto {% endif %}">
                     {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <!-- Якщо суперкористувач (адмін) -->
+                    <a href="/account/register-teacher/" class="tn text-white nav-item nav-link align-items-center d-flex me-2 bg-aquagreen justify-content-center rounded-pill" style="height: 36px;">
+                        <img src="{% static 'img/plus.png' %}" alt="" style="max-width: 22px; margin-right: 8px;">
+                        <span style="font-size: 16px; margin-right: 8px;" class="align-items-center">Додати вчителя</span>
+                    </a>
+                    {% else %}
+                    <!-- Якщо звичайний користувач -->
                     <a href="#" class="btn nav-item nav-link align-items-center d-flex me-2 bg-aquagreen justify-content-center rounded-pill" style="width: 36px; height: 36px;">
                         <img src="{% static 'img/plus.png' %}" alt="" style="max-width: 22px;">
                     </a>
+                    {% endif %}
 
                     <div class="nav-item dropdown dropdown-menu-end">
                         <a class="nav-link dropdown-toggle bg-cyan align-items-center d-flex px-3 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" style="height: 36px;">
                             <img src="{% static 'img/user.png' %}" alt="" style="max-width: 22px;">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-light">
-              
+                            <li><span class="dropdown-item-text">Привіт, {{ user.username }}!</span></li>
                             <li><a class="dropdown-item" href="/account/login/">Профіль</a></li>
                             <li><a class="dropdown-item" href="/account/logout/">Вийти</a></li>
               

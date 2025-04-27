@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
-from .models import User, Student
+from .models import User, Student, Teacher
 
 # Create your views here.
 def landing_page(request):
@@ -52,6 +52,49 @@ def register_student(request):
         return redirect('/')
     
     return render(request, 'accounts/register.html')
+
+def register_teacher(request):
+    if not request.user.is_superuser:
+        messages.error(request, "Доступ заборонено: тільки для адміністратора.")
+        return redirect('/')
+
+    if request.method == 'POST':
+        login = request.POST['login']
+        password = request.POST['pass']
+        confirm_password = request.POST['confirm_pass']
+        email = request.POST['email']
+        last_name = request.POST['lastname']
+        first_name = request.POST['firstname']
+
+        context = {
+            'login': login or '',
+            'email': email,
+            'lastname': last_name,
+            'firstname': first_name
+        }
+
+        if password != confirm_password:
+            context['pass_err'] = 'Введені паролі не співпадають'
+            return render(request, 'accounts/register_teacher.html', context)
+
+        user = User.objects.create_user(
+            username=login,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
+        )
+        user.save()
+
+        teacher = Teacher.objects.create(
+            user=user
+        )
+        teacher.save()
+
+        messages.success(request, "Викладача успішно додано!")
+        return redirect('/')
+    
+    return render(request, 'accounts/register_teacher.html')
 
 def login(request):
     if request.method == 'POST':
