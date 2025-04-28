@@ -12,6 +12,6 @@ class Course(models.Model):
         on_delete=models.CASCADE,
         related_name='course_teacher'
     )
-    color = models.CharField(max_length=7)
+    color = models.CharField(max_length=24)
     isArchived = models.BooleanField()
 

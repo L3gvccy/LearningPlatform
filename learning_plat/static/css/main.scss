@@ -4,6 +4,8 @@
 $custom-colors: (
     "cyan": #04aef9,
     "aquagreen": #05d0b2,
+    "purple": #c16ae8,
+    "orange": #f9b540
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
