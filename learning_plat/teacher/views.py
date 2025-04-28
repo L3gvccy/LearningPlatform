@@ -17,10 +17,12 @@ def create_course(request):
         color = request.POST['color']
         code = generate_code()
         while True:
-            if Course.objects.filter(courseId = code):
-
+            if Course.objects.filter(courseId = code).exists():
+                code = generate_code()
+  
+            else:
                 break
-            code = generate_code()
+            
 
         context = {
             'title' : title,
@@ -30,10 +32,10 @@ def create_course(request):
 
         if len(title) < 0:
             context['title_err'] = 'Поле назви не може бути пустим'
-            return render(request, 'url', context)
+            return render(request, 'teacher/create_course.html', context)
         if len(desc) < 0:
             context['desc_err'] = 'Опис не може бути пустим'
-            return render(request, 'url', context)
+            return render(request, 'teacher/create_course.html', context)
         
         course = Course.objects.create(
             title = title,
@@ -47,4 +49,4 @@ def create_course(request):
 
         messages.success(request,'Курс створено!')
         return redirect('/')
-    return render(request, 'url')
+    return render(request, 'teacher/create_course.html')
