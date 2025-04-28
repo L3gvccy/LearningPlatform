@@ -13,5 +13,5 @@ class Course(models.Model):
         related_name='teacher'
     )
     color = models.CharField(max_length=7)
-    IsArchived = models.BooleanField()
+    isArchived = models.BooleanField()
 
