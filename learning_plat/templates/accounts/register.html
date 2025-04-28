@@ -13,19 +13,22 @@
             <div class="mb-3">
                 <label for="login" class="form-label">Логін</label>
                 <input type="text" name="login" class="form-control" value="{{ login }}">
+                {% if login_err %}
+                <p class="text-danger">{{ login_err }}</p>
+                {% endif %}
             </div>
             
             <div class="mb-3">
                 <label for="pass" class="form-label">Пароль</label>
                 <input type="text" name="pass" class="form-control">
+                {% if pass_err %}
+                <p class="text-danger">{{ pass_err }}</p>
+                {% endif %}
             </div>
             
             <div class="mb-3">
                 <label for="confirm_pass" class="form-label">Повтор паролю</label>
                 <input type="text" name="confirm_pass" class="form-control">
-                {% if pass_err %}
-                <p class="text-danger">{{ pass_err }}</p>
-                {% endif %}
             </div>
 
             <div class="mb-3">

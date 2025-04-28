@@ -23,7 +23,7 @@ def register_student(request):
         first_name = request.POST['firstname']
 
         context = {
-            'login': login or '',
+            'login': login,
             'email': email,
             'lastname': last_name,
             'firstname': first_name
@@ -31,6 +31,14 @@ def register_student(request):
 
         if password != confirm_password:
             context['pass_err'] = 'Введені паролі не співпадають'
+            return render(request, 'accounts/register.html', context)
+        
+        if password.length < 3:
+            context['pass_err'] = 'Пароль має складатись мінімум з 3 символів'
+            return render(request, 'accounts/register.html', context)
+        
+        if User.objects.filter(username = login).exists():
+            context['login_err'] = 'Користувач з таким логіном вже існує'
             return render(request, 'accounts/register.html', context)
 
         # Спочатку створюємо користувача
@@ -69,7 +77,7 @@ def register_teacher(request):
         first_name = request.POST['firstname']
 
         context = {
-            'login': login or '',
+            'login': login,
             'email': email,
             'lastname': last_name,
             'firstname': first_name
@@ -78,6 +86,14 @@ def register_teacher(request):
         if password != confirm_password:
             context['pass_err'] = 'Введені паролі не співпадають'
             return render(request, 'accounts/register_teacher.html', context)
+        
+        if password.length < 3:
+            context['pass_err'] = 'Пароль має складатись мінімум з 3 символів'
+            return render(request, 'accounts/register.html', context)
+        
+        if User.objects.filter(username = login).exists():
+            context['login_err'] = 'Користувач з таким логіном вже існує'
+            return render(request, 'accounts/register.html', context)
 
         user = User.objects.create_user(
             username=login,
