@@ -4,32 +4,38 @@
 {% block title %}Мої курси{% endblock %}
 
 {% block content %}
-<div class="container mt-5 text-center">
-    <h2 class="mb-4">Мої курси</h2>
 
-    {% if courses %}
-        <div class="row justify-content-center">
-            {% for course in courses %}
-                <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                    <div class="card shadow w-100" style="background-color: {{ course.color }};">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ course.title }}</h5>
-                            <p class="card-text">{{ course.desc }}</p>
-                            <p class="card-text"><strong>Викладач:</strong> {{ course.teacher.get_full_name }}</p>
-                            <div class="mt-auto">
-                                <!-- Кнопка для виходу з курсу -->
-                                <form action="{% url 'leave_course' course.courseId %}" method="POST">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Вийти з курсу</button>
-                                </form>
-                            </div>
+<div class="container py-4">
+    <div class="col-12 border rounded p-4">
+        {% if courses.count > 0 %}
+            <h2 class="text-center mb-4">Мої курси</h2>
+            <div class="row">
+                {% for course in courses %}
+                <div class="col-md-3 p-2">
+                    <div class="rounded border">
+                        <div class="p-3 rounded-top bg-{{ course.color }}" style="height: 148px;">
+                            <a href="/" class="text-decoration-none"><h4 class="text-light mb-0">{{ course.title }}</h4></a>
+                        </div>
+                        <div class="p-3" style="height: 148px;">
+                            <p class="mb-2"><span class="fw-bold">Викладач:</span> {{ course.teacher.get_full_name }}</p>
+                            <p class="mb-0">{{ course.desc }}</p>
+                        </div>
+                        <div class="mx-3 mb-3">
+                            <a href="{% url 'leave_course' course.courseId %}" class="btn btn-outline-danger w-100 mb-2">Вийти з курсу</a>
+                            <a href="" class="btn btn-{{ course.color }} w-100 text-light">Переглянути</a>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>Ви ще не підключені до жодного курсу.</p>
-    {% endif %}
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h4 class="text-center mb-4">Жодних курсів не знайдено</h4>
+                <button data-bs-toggle="modal" data-bs-target="#connectCourseModal" class="btn btn-aquagreen text-center px-4 mx-auto rounded">Приєднатись до курсу</button>
+            </div>
+        {% endif %}
+    </div>
 </div>
+
 {% endblock %}
