@@ -19,7 +19,7 @@ def create_course(request):
         while True:
             if Course.objects.filter(courseId = code).exists():
                 code = generate_code()
-  
+              
             else:
                 break
             
