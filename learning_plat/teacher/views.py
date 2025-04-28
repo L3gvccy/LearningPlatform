@@ -50,3 +50,13 @@ def create_course(request):
         messages.success(request,'Курс створено!')
         return redirect('/')
     return render(request, 'teacher/create_course.html')
+
+def display_courses(request):
+    teacher = request.user
+    courses = Course.objects.filter(teacher = teacher)
+
+    context = {
+        'courses': courses
+    }
+
+    return render(request, 'teacher/display_courses.html', context)
