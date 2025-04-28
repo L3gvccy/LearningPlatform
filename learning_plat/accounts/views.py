@@ -100,7 +100,8 @@ def register_teacher(request):
             email=email,
             password=password,
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
+            is_staff = True
         )
         user.save()
 
