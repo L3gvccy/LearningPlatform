@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Мої курси{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="mb-4">Мої курси</h2>
+
+    {% if courses %}
+        <div class="row justify-content-center">
+            {% for course in courses %}
+                <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow w-100" style="background-color: {{ course.color }};">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.desc }}</p>
+                            <p class="card-text"><strong>Викладач:</strong> {{ course.teacher.get_full_name }}</p>
+                            <div class="mt-auto">
+                                <!-- Кнопка для виходу з курсу -->
+                                <form action="{% url 'leave_course' course.courseId %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Вийти з курсу</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Ви ще не підключені до жодного курсу.</p>
+    {% endif %}
+</div>
+{% endblock %}
