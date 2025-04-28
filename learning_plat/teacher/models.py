@@ -7,10 +7,10 @@ class Course(models.Model):
     courseId = models.CharField(max_length=6,primary_key=True)
     title = models.CharField(max_length=128)
     desc = models.CharField(max_length=256)
-    teacher = models.OneToOneField(
+    teacher = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='teacher'
+        related_name='course_teacher'
     )
     color = models.CharField(max_length=7)
     isArchived = models.BooleanField()
