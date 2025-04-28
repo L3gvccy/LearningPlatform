@@ -33,7 +33,7 @@ def register_student(request):
             context['pass_err'] = 'Введені паролі не співпадають'
             return render(request, 'accounts/register.html', context)
         
-        if password.length < 3:
+        if len(password) < 3:
             context['pass_err'] = 'Пароль має складатись мінімум з 3 символів'
             return render(request, 'accounts/register.html', context)
         
@@ -87,7 +87,7 @@ def register_teacher(request):
             context['pass_err'] = 'Введені паролі не співпадають'
             return render(request, 'accounts/register_teacher.html', context)
         
-        if password.length < 3:
+        if len(password) < 3:
             context['pass_err'] = 'Пароль має складатись мінімум з 3 символів'
             return render(request, 'accounts/register.html', context)
         
