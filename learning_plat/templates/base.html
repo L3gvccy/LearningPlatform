@@ -31,9 +31,24 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <!-- Центр: меню -->
                 {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <!-- Для викладача -->
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-aquagreen fw-bold" href="/">Головна</a>
+                        <a class="nav-link {% if request.path == '/' %} text-aquagreen fw-bold {% endif %}" href="/">Головна</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link {% if request.path|slice:':17' == '/teacher/courses/' %} text-aquagreen fw-bold {% endif %}" href="/teacher/courses/">Курси</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">Завдання</a>
+                    </li>
+                </ul>
+                {% else %}
+                <!-- Для студента -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link {% if request.path == '/' %} text-aquagreen fw-bold {% endif %}" href="/">Головна</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="#">Курси</a>
@@ -42,6 +57,7 @@
                         <a class="nav-link" href="#">Завдання</a>
                     </li>
                 </ul>
+                {% endif %}
                 {% endif %}
     
                 <!-- Правий блок з кнопками -->
@@ -129,16 +145,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
             </div>
             <div class="modal-body">
-            <form id="connectCourseForm">
+            <form id="connectCourseForm" method="POST" action="{% url 'connect_to_course' %}">
+                {% csrf_token %}
                 <div class="mb-3">
-                <label for="courseCode" class="form-label">Код курсу</label>
-                <input type="text" class="form-control" id="courseCode" placeholder="Введіть код курсу">
+                    <label for="courseCode" class="form-label">Код курсу</label>
+                    <input type="text" class="form-control" id="courseCode" name="course_code" placeholder="Введіть код курсу" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-aquagreen text-white">Підключитись</button>
                 </div>
             </form>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-aquagreen text-white">Підключитись</button>
-            </div>
         </div>
         </div>
     </div>
