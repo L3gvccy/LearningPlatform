@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Створити курс{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="col-md-4 mx-auto rounded border p-3">
+        <form method="post">
+            {% csrf_token %}
+
+            <h3 class="mb-3 text-center">Створити курс</h3>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Назва курсу</label>
+                <input name="title" id="title" class="form-control" value="{{ title }}" required>
+                {% if title_err %}
+                <p class="text-danger">{{ title_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="desc" class="form-label">Опис курсу</label>
+                <textarea name="desc" id="desc" class="form-control" rows="3" value="{{ desc }}" required></textarea>
+                {% if desc_err %}
+                <p class="text-danger">{{ desc_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="color" class="form-label">Колір фону</label>
+                <input type="color" name="color" id="color" class="form-control form-control-color" value="#04aef9">
+            </div>
+
+            <button type="submit" class="btn btn-aquagreen rounded text-light text-center w-100">Створити курс</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
