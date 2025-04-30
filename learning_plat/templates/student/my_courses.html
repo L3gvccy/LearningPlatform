@@ -14,7 +14,7 @@
                 <div class="col-md-3 p-2">
                     <div class="rounded border">
                         <div class="p-3 rounded-top bg-{{ course.color }}" style="height: 148px;">
-                            <a href="/" class="text-decoration-none"><h4 class="text-light mb-0">{{ course.title }}</h4></a>
+                            <a href="{% url 'view_course_student' course.courseId %}" class="text-decoration-none"><h4 class="text-light mb-0">{{ course.title }}</h4></a>
                         </div>
                         <div class="p-3" style="height: 148px;">
                             <p class="mb-2"><span class="fw-bold">Викладач:</span> {{ course.teacher.get_full_name }}</p>
