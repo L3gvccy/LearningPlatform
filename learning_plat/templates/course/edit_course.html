@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Редагувати курс{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="col-md-4 mx-auto rounded border p-3">
+        <form method="post">
+            {% csrf_token %}
+
+            <h3 class="mb-3 text-center">Редагувати курс</h3>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Назва курсу</label>
+                <input name="title" id="title" class="form-control" value="{{ course.title }}" required>
+                {% if title_err %}
+                <p class="text-danger">{{ title_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="desc" class="form-label">Опис курсу</label>
+                <textarea name="desc" id="desc" class="form-control" rows="3" required>{{ course.desc }}</textarea>
+                {% if desc_err %}
+                <p class="text-danger">{{ desc_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="color" class="form-label">Колір фону</label>
+                <select name="color" id="color" class="form-select">
+                    <option value="aquagreen" {% if course.color == 'aquagreen' %} selected {% endif %}>Зелений</option>
+                    <option value="cyan" {% if course.color == 'cyan' %} selected {% endif %}>Голубий</option>
+                    <option value="purple" {% if course.color == 'purple' %} selected {% endif %}>Фіолетовий</option>
+                    <option value="orange" {% if course.color == 'orange' %} selected {% endif %}>Помаранчевий</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-aquagreen rounded text-light text-center w-100">Підтвердити зміни</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
