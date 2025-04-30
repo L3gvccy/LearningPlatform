@@ -41,7 +41,7 @@
                         {% if user.is_staff %}
                         <a href="{% url 'create_assignment' course.courseId lesson.id %}" class="btn btn-aquagreen px-4">Додати завдання</a>
                         {% else %}
-    
+                        <p class="mb-0">До цього уроку немає завдання</p>
                         {% endif %}
                     {% endif %}
                 </div>
