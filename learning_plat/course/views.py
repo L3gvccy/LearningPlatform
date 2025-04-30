@@ -6,8 +6,7 @@ from lesson.models import Lesson
 # Create your views here.
 def view_course(request, courseId):
     course = Course.objects.get(courseId = courseId)
-    lessons = Lesson.objects.get(course_id = course).order_by('-createdAt')
-    
+    lessons = Lesson.objects.filter(course_id = course).order_by('-createdAt')
 
     context = {
         'course': course,
