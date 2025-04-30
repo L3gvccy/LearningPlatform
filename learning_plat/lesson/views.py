@@ -39,7 +39,7 @@ def create_lesson(request, courseId):
         lesson.save()
 
         messages.success(request,'Урок створено!')
-        return redirect('/')
+        return redirect(f'/teacher/courses/{courseId}/')
     return render(request,'lesson/create_lesson.html')
         
 
