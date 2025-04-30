@@ -3,7 +3,7 @@ from lesson.models import Lesson
 
 class Assignment(models.Model):
     title = models.CharField(max_length=128)
-    description = models.CharField(max_length=512)
+    desc = models.CharField(max_length=512)
     due_date = models.DateTimeField()
     lesson = models.ForeignKey(
         Lesson,
