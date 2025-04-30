@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from teacher.models import Course
+from lesson.models import Lesson
 
 # Create your views here.
 def view_course(request, courseId):
     course = Course.objects.get(courseId = courseId)
+    lessons = Lesson.objects.get(course_id = course).order_by('-createdAt')
+    
 
     context = {
-        'course': course
+        'course': course,
+        'lessons' : lessons
     }
 
     return render(request, 'course/view_course.html', context)
