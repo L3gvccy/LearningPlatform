@@ -24,7 +24,15 @@
                         Лекція
                         {% endif %}
                     </h4>
-                    <p class="mb-0">{{ lesson.content }}</p>
+                    <p class="mb-2">{{ lesson.content }}</p>
+                    <p class="mb-0">
+                        <span class="fw-bold">Додаткове посилання: </span>
+                        {% if lesson.link %}
+                        <a href="{{ lesson.link }}" target="_blank">{{ lesson.link }}</a>
+                        {% else %}
+                        Додаткове посилання відсутнє
+                        {% endif %}
+                    </p>
                 </div>
                 <div class="p-4">
                     {% if assignment %}
