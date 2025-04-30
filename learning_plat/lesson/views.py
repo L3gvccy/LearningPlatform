@@ -41,7 +41,14 @@ def create_lesson(request, courseId):
         messages.success(request,'Урок створено!')
         return redirect(f'/teacher/courses/{courseId}/')
     return render(request,'lesson/create_lesson.html')
-        
 
-        
-    
+def view_lesson(request, courseId, lessonId ):
+    course = Course.objects.get(courseId = courseId)
+    lesson = Lesson.objects.get(id = lessonId)
+
+    context = {
+        'course': course,
+        'lesson': lesson
+    }
+
+    return render(request, 'lesson/view_lesson.html', context)

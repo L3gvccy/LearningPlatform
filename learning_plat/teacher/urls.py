@@ -3,6 +3,7 @@ from teacher.views import create_course, display_courses
 from course.views import view_course, edit_course, remove_student, archive_course
 from lesson.views import create_lesson
 from assignment.views import create_assignment
+from lesson.views import create_lesson, view_lesson
 
 urlpatterns = [
     path('create_course/', create_course, name='create_course'),
@@ -13,4 +14,5 @@ urlpatterns = [
     path('courses/<str:courseId>/create_lesson/', create_lesson, name='create_lesson'),
     path('courses/<str:courseId>/remove_student/<int:studentId>', remove_student, name='remove_student'),
     path('courses/<str:courseId>/<str:lessonId>/create_assignment/', create_assignment, name='create_assignment'),
+    path('courses/<str:courseId>/<str:lessonId>/', view_lesson, name='view_lesson'),
 ]
