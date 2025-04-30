@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Lesson
 from teacher.models import Course
+from assignment.models import Assignment
 
 
 def create_lesson(request, courseId):
@@ -42,13 +43,19 @@ def create_lesson(request, courseId):
         return redirect(f'/teacher/courses/{courseId}/')
     return render(request,'lesson/create_lesson.html')
 
-def view_lesson(request, courseId, lessonId ):
+def view_lesson(request, courseId, lessonId):
     course = Course.objects.get(courseId = courseId)
     lesson = Lesson.objects.get(id = lessonId)
+    assignment = None
+    try:
+        assignment = Assignment.objects.get(lesson = lesson)
+    except:
+        pass
 
     context = {
         'course': course,
-        'lesson': lesson
+        'lesson': lesson,
+        'assignment': assignment
     }
 
     return render(request, 'lesson/view_lesson.html', context)
