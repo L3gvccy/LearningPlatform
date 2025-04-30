@@ -12,6 +12,11 @@
         <div class="border-bottom px-4 py-2">
             <a href="{% url 'create_lesson' course.courseId %}" class="btn btn-aquagreen px-4 text-light">Додати урок</a>
             <a href="{% url 'edit_course' course.courseId %}" class="btn btn-secondary px-4">Редагувати курс</a>
+            {% if course.isArchived %}
+            <a href="{% url 'archive_course' course.courseId %}" class="btn btn-secondary px-4">Розархівувати курс</a>
+            {% else %}
+            <a href="{% url 'archive_course' course.courseId %}" class="btn btn-secondary px-4">Архівувати курс</a>
+            {% endif %}
             <a href="" class="btn btn-danger px-4">Видалити курс</a>
         </div>
     {% endif %}

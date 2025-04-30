@@ -59,3 +59,16 @@ def remove_student(request, courseId, studentId):
 
     messages.success(request, f'Студента {name} було вилучено!')
     return redirect(f'/teacher/courses/{courseId}/')
+
+def archive_course(request, courseId):
+    course = Course.objects.get(courseId = courseId)
+    if course.isArchived:
+        course.isArchived = False
+        messages.success(request, f'Курс { course.title } було розархівовано.')
+    else:
+        course.isArchived = True 
+        messages.success(request, f'Курс { course.title } було архівовано.') 
+
+    course.save()    
+
+    return redirect(f'/teacher/courses/{courseId}/')
