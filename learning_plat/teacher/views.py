@@ -60,3 +60,12 @@ def display_courses(request):
     }
 
     return render(request, 'teacher/display_courses.html', context)
+
+def view_course(request, courseId):
+    course = Course.objects.get(courseId = courseId)
+
+    context = {
+        'course': course
+    }
+
+    return render(request, 'course/view_course.html', context)

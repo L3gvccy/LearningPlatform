@@ -59,3 +59,12 @@ def leave_course(request, courseId):
         messages.error(request, "Цей курс не знайдений у вашому списку.")
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def view_course(request, courseId):
+    course = Course.objects.get(courseId = courseId)
+
+    context = {
+        'course': course
+    }
+
+    return render(request, 'course/view_course.html', context)
