@@ -20,7 +20,7 @@
                         </div>
                         <div class="mx-3 mb-3">
                             <a href="" class="btn btn-outline-danger w-100 mb-2" onclick="return confirmDeleteCourse();">Видалити курс</a>
-                            <a href="" class="btn btn-{{ course.color }} w-100 text-light">Переглянути</a>
+                            <a href="{% url 'view_course_teacher' course.courseId %}" class="btn btn-{{ course.color }} w-100 text-light">Переглянути</a>
                         </div>
                     </div>
                 </div>
