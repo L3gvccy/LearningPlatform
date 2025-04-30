@@ -16,8 +16,6 @@ def view_course(request, courseId):
         'students' : students
     }
 
-    print(context)
-
     return render(request, 'course/view_course.html', context)
 
 def edit_course(request, courseId):

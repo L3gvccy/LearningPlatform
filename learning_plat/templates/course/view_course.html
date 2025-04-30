@@ -101,9 +101,16 @@
                 <div class="tab-pane fade show active" id="home2" role="tabpanel">
                     {% if lessons.count > 0 %}
                     {% for lesson in lessons %}
-                    <a href="" class="text-decoration-none">
+                    <a href="{% url 'view_lesson' course.courseId lesson.id %}" class="text-decoration-none">
                         <div class="rounded border text-dark mb-4 lesson-hover">
-                            <h4 class="text-dark m-4">{{ lesson.title }}</h4>
+                            <h4 class="text-dark m-4 mb-1">{{ lesson.title }}</h4>
+                            <p class="mx-4 mb-4">
+                                {% if lesson.type == 'practice' %}
+                                Практичне завдання
+                                {% else %}
+                                Лекція
+                                {% endif %}
+                            </p>
                         </div>
                     </a>
                     {% endfor %}
