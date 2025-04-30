@@ -36,8 +36,7 @@ def view_my_courses(request):
         messages.error(request, "Ваш акаунт не має ролі студента.")
         return redirect('/')
 
-    courses = Course.objects.filter(courseId__in=student.courses_id)
-    courses = courses.filter(isArchived = False)
+    courses = Course.objects.filter(courseId__in=student.courses_id, isArchived__in=[False, None])
 
     context = {
         'courses': courses,
