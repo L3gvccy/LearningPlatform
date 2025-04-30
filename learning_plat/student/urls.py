@@ -1,5 +1,6 @@
 from django.urls import path, include
-from student.views import connect_to_course, view_my_courses, leave_course, view_course
+from student.views import connect_to_course, view_my_courses, leave_course
+from course.views import view_course
 
 urlpatterns = [
     path('connect_course/', connect_to_course, name='connect_to_course'),

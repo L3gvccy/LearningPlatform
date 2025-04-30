@@ -1,5 +1,6 @@
 from django.urls import path, include
-from teacher.views import create_course, display_courses, view_course, edit_course
+from teacher.views import create_course, display_courses
+from course.views import view_course, edit_course
 
 urlpatterns = [
     path('create_course/', create_course, name='create_course'),
