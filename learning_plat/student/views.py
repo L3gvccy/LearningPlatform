@@ -37,6 +37,7 @@ def view_my_courses(request):
         return redirect('/')
 
     courses = Course.objects.filter(courseId__in=student.courses_id)
+    courses = courses.filter(isArchived = False)
 
     context = {
         'courses': courses,
