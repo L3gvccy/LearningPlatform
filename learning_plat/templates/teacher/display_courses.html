@@ -19,7 +19,7 @@
                             <p>{{ course.desc }}</p>
                         </div>
                         <div class="mx-3 mb-3">
-                            <a href="{% url 'delete_course' course.courseId %}" class="btn btn-outline-danger w-100 mb-2" onclick="return confirmDeleteCourse();">Видалити курс</a>
+                            <a href="" class="btn btn-outline-danger w-100 mb-2" onclick="return confirmMsg('Ви точно бажаєте видалити курс?');">Видалити курс</a>
                             <a href="{% url 'view_course_teacher' course.courseId %}" class="btn btn-{{ course.color }} w-100 text-light">Переглянути</a>
                         </div>
                     </div>
@@ -35,11 +35,5 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-    function confirmDeleteCourse() {
-        return confirm('Ви точно хочете видалити курс?');
-    }
-</script>
 
 {% endblock %}

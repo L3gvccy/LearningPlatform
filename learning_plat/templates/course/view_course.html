@@ -17,7 +17,7 @@
             {% else %}
             <a href="{% url 'archive_course' course.courseId %}" class="btn btn-secondary px-4">Архівувати курс</a>
             {% endif %}
-            <a href="{% url 'delete_course' course.courseId %}" class="btn btn-danger px-4">Видалити курс</a>
+            <a href="" onclick="return confirmMsg('Ви точно бажаєте видалити курс?')" class="btn btn-danger px-4">Видалити курс</a>
         </div>
     {% endif %}
 
@@ -127,7 +127,7 @@
                     {% for student in students %}
                         <div class="border-bottom text-dark mb-2 p-2 d-flex align-items-center justify-content-between">
                             <h5 class="text-dark">{{ student.user.get_full_name }}</h5>
-                            <a href="{% url 'remove_student' course.courseId student.id %}" class="btn btn-danger">Видалити</a>
+                            <a href="{% url 'remove_student' course.courseId student.id %}" onclick="return confirmMsg('Ви точно бажаєте видалити студента?')" class="btn btn-danger">Видалити</a>
                         </div>
                     {% endfor %}
                     {% else %}
