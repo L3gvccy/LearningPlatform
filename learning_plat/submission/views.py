@@ -44,6 +44,7 @@ def delete_submission(request, courseId, lessonId):
 
 def submission_list(request, courseId, lessonId):
     course = Course.objects.get(courseId=courseId)
+    title = Lesson.objects.get(id=lessonId).title
     if request.method == 'POST':
         submission_id = request.POST.get('submission_id')
         grade = request.POST.get('grade')
@@ -58,5 +59,7 @@ def submission_list(request, courseId, lessonId):
         messages.success(request, 'Оцінка посталенна успішно!')
         return redirect('submission_list', courseId=courseId, lessonId=lessonId)
 
-    submissions = Submission.objects.select_related('student', 'assignment')
-    return render(request, 'submission/submission_list.html', {'submissions': submissions, 'course': course})
+    lesson = Lesson.objects.get(id=lessonId)
+    assignment = Assignment.objects.get(lesson = lesson)
+    submissions = Submission.objects.filter(assignment=assignment)
+    return render(request, 'submission/submission_list.html', {'submissions': submissions, 'course': course, 'title': title})

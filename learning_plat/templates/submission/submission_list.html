@@ -5,12 +5,13 @@
 {% block content %}
 <div class="container my-4 rounded border p-0">
     <div class="bg-{{ course.color }} text-light p-4 rounded-top">
-        <h2>Список поданих робіт</h2>
+        <h2>{{ title }}</h2>
+        <p class="mb-0">Список поданих робіт</p>
     </div>
     <div class="p-4">
         {% if submissions %}
         <div class="table-responsive">
-            <table class="table table-bordered align-middle">
+            <table class="table table-bordered align-middle table-hover">
                 <thead class="table-light">
                     <tr>
                         <th>Студент</th>
