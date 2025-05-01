@@ -59,3 +59,43 @@ def view_lesson(request, courseId, lessonId):
     }
 
     return render(request, 'lesson/view_lesson.html', context)
+
+def edit_lesson(request, courseId, lessonId):
+    lesson = Lesson.objects.get(id = lessonId)
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        type = request.POST['type']
+        link = request.POST['link']
+
+        context = {
+            'title' : title,
+            'content' : content,
+            'type' : type,
+            'link' : link
+        }
+
+        if len(title) < 0:
+            context['title_err'] = 'Поле назви не може бути пустим'
+            return render(request, 'lesson/edit_lesson.html', context)
+        if len(content) < 0:
+            context['content_err'] = 'Опис не може бути пустим'
+            return render(request, 'lesson/edit_lesson.html', context)
+        
+        lesson.title = title
+        lesson.content = content
+        lesson.type = type
+        lesson.link = link
+        lesson.save()
+
+        messages.success(request,'Урок успішно змінено!')
+        return redirect('view_lesson', courseId=courseId, lessonId=lessonId)
+    
+    return render(request, 'lesson/edit_lesson.html', {'lesson': lesson})
+
+def delete_lesson(request, courseId, lessonId):
+    lesson = Lesson.objects.get(id = lessonId)
+    lesson.delete()
+
+    messages.success(request,'Урок успішно видалено!')
+    return redirect('view_course_teacher', courseId=courseId)
