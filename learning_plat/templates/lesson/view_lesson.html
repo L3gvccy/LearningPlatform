@@ -10,7 +10,7 @@
     {% if user.is_staff %}
         <div class="border-bottom px-4 py-2">
             <a href="{% url 'edit_lesson' course.courseId lesson.id %}" class="btn btn-secondary px-4">Редагувати урок</a>
-            <a href="{% url 'delete_lesson' course.courseId lesson.id %}" class="btn btn-danger px-4">Видалити урок</a>
+            <a href="{% url 'delete_lesson' course.courseId lesson.id %}" onclick="return confirmMsg('Ви точно бажаєте видалити урок?')" class="btn btn-danger px-4">Видалити урок</a>
         </div>
     {% endif %}
     <div class="row">
@@ -43,7 +43,7 @@
                     {% if user.is_staff %}
                     <div>
                         <a href="{% url 'edit_assignment' course.courseId lesson.id %}" class="btn btn-secondary px-4">Редагувати завдання</a>
-                        <a href="{% url 'delete_assignment' course.courseId lesson.id %}" class="btn btn-danger px-4">Видалити завдання</a>
+                        <a href="{% url 'delete_assignment' course.courseId lesson.id %}" onclick="return confirmMsg('Ви точно бажаєте видалити завдання?')" class="btn btn-danger px-4">Видалити завдання</a>
                     </div>
                     {% endif %}
                     {% else %}
@@ -83,7 +83,7 @@
 
                         {% if submission.file_url %}
                         <button type="submit" class="btn btn-{{ course.color }} w-100 text-light mb-2">Здати повторно</button>
-                        <a href="{% url 'delete_submission' course.courseId lesson.id %}" class="btn btn-danger w-100 text-light">Видалити</a>
+                        <a href="{% url 'delete_submission' course.courseId lesson.id %}" onclick="return confirmMsg('Ви точно бажаєте видалити завдання?')" class="btn btn-danger w-100 text-light">Видалити</a>
                         {% else %}
                         <button type="submit" class="btn btn-{{ course.color }} w-100 text-light">Прикріпити</button>
                         {% endif %}
