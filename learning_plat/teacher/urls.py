@@ -4,6 +4,7 @@ from course.views import view_course, edit_course, remove_student, archive_cours
 from lesson.views import create_lesson
 from assignment.views import create_assignment, edit_assignment, delete_assignment
 from lesson.views import create_lesson, view_lesson, edit_lesson, delete_lesson
+from submission.views import submission_list
 
 urlpatterns = [
     # Курс
@@ -24,4 +25,8 @@ urlpatterns = [
     path('courses/<str:courseId>/<str:lessonId>/create_assignment/', create_assignment, name='create_assignment'),
     path('courses/<str:courseId>/<str:lessonId>/edit_assignment/', edit_assignment, name='edit_assignment'),
     path('courses/<str:courseId>/<str:lessonId>/delete_assignment/', delete_assignment, name='delete_assignment'),
+    
+    # Подані роботи (submission)
+    path('courses/<str:courseId>/<str:lessonId>/submissions/', submission_list, name='submission_list'),
+
 ]
