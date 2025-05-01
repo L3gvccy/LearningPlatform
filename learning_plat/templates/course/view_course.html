@@ -17,7 +17,7 @@
             {% else %}
             <a href="{% url 'archive_course' course.courseId %}" class="btn btn-secondary px-4">Архівувати курс</a>
             {% endif %}
-            <a href="" class="btn btn-danger px-4">Видалити курс</a>
+            <a href="{% url 'delete_course' course.courseId %}" class="btn btn-danger px-4">Видалити курс</a>
         </div>
     {% endif %}
 
