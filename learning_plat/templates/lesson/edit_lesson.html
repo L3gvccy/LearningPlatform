@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Редагувати урок{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="col-md-4 mx-auto rounded border p-3">
+        <form method="post">
+            {% csrf_token %}
+
+            <h3 class="mb-3 text-center">Редагувати урок</h3>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Назва уроку</label>
+                <input name="title" id="title" class="form-control" value="{{ lesson.title }}" required>
+                {% if title_err %}
+                <p class="text-danger">{{ title_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Наповнення уроку</label>
+                <textarea name="content" id="content" class="form-control" rows="3" required>{{ lesson.content }}</textarea>
+                {% if content_err %}
+                <p class="text-danger">{{ content_err }}</p>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="link" class="form-label">Додактове посилання</label>
+                <input name="link" id="link" class="form-control" value="{{ lesson.link }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Тип заняття</label>
+                <select name="type" id="type" class="form-select">
+                    <option value="lecture" {% if lesson.type == "lecture" %} selected {% endif %}>Лекція</option>
+                    <option value="practice" {% if lesson.type == "practice" %} selected {% endif %}>Практика</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-aquagreen rounded text-light text-center w-100">Підтвердити зміни</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

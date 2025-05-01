@@ -51,7 +51,10 @@
                         <a class="nav-link {% if request.path == '/' %} text-aquagreen fw-bold {% endif %}" href="/">Головна</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link {% if request.path|slice:':20' == '/student/my_courses/' %} text-aquagreen fw-bold {% endif %}" href="/student/my_courses/">Курси</a>
+                        <a class="nav-link 
+                        {% if request.path|slice:':20' == '/student/my_courses/' %} text-aquagreen fw-bold {% endif %}
+                        {% if request.path|slice:':17' == '/teacher/courses/' %} text-aquagreen fw-bold {% endif %}
+                        " href="/student/my_courses/">Курси</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="#">Завдання</a>

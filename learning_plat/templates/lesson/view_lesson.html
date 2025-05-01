@@ -9,8 +9,8 @@
     </div>
     {% if user.is_staff %}
         <div class="border-bottom px-4 py-2">
-            <a href="" class="btn btn-secondary px-4">Редагувати урок</a>
-            <a href="" class="btn btn-danger px-4">Видалити урок</a>
+            <a href="{% url 'edit_lesson' course.courseId lesson.id %}" class="btn btn-secondary px-4">Редагувати урок</a>
+            <a href="{% url 'delete_lesson' course.courseId lesson.id %}" class="btn btn-danger px-4">Видалити урок</a>
         </div>
     {% endif %}
     <div class="row">
@@ -41,8 +41,8 @@
                     <p class="mb-2"><span class="fw-bold">Дата здачі:</span> {{ assignment.due_date|date:"d E Y" }}</p>
                     <p class="mb-2">{{ assignment.desc }}</p>
                     <div>
-                        <a href="" class="btn btn-secondary px-4">Редагувати завдання</a>
-                        <a href="" class="btn btn-danger px-4">Видалити завдання</a>
+                        <a href="{% url 'edit_assignment' course.courseId lesson.id %}" class="btn btn-secondary px-4">Редагувати завдання</a>
+                        <a href="{% url 'delete_assignment' course.courseId lesson.id %}" class="btn btn-danger px-4">Видалити завдання</a>
                     </div>
                     {% else %}
                     <h4>Завдання</h4>
