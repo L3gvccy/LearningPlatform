@@ -77,7 +77,10 @@
                                 {% endif %}
                             {% endif %}
                         </p>
-                        <input type="text" class="form-control mb-2" name="file_url" value="{{ submission.file_url }}">
+
+                        <label for="file_url" class="form-label">Посилання на файл:</label>
+                        <input type="text" class="form-control mb-2" id="file_url" name="file_url" value="{{ submission.file_url }}">
+
                         {% if submission.file_url %}
                         <button type="submit" class="btn btn-{{ course.color }} w-100 text-light mb-2">Здати повторно</button>
                         <a href="{% url 'delete_submission' course.courseId lesson.id %}" class="btn btn-danger w-100 text-light">Видалити</a>
