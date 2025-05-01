@@ -41,3 +41,22 @@ def delete_submission(request, courseId, lessonId):
 
     messages.success(request, 'Прикріплене завдання успішно видалене!')
     return redirect('view_lesson', courseId=courseId, lessonId=lessonId)
+
+def submission_list(request, courseId, lessonId):
+    course = Course.objects.get(courseId=courseId)
+    if request.method == 'POST':
+        submission_id = request.POST.get('submission_id')
+        grade = request.POST.get('grade')
+        if submission_id and grade is not None:
+            try:
+                submission = Submission.objects.get(id=submission_id)
+                submission.grade = int(grade)
+                submission.save()
+            except Submission.DoesNotExist:
+                pass 
+
+        messages.success(request, 'Оцінка посталенна успішно!')
+        return redirect('submission_list', courseId=courseId, lessonId=lessonId)
+
+    submissions = Submission.objects.select_related('student', 'assignment')
+    return render(request, 'submission/submission_list.html', {'submissions': submissions, 'course': course})

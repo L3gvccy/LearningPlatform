@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Подані роботи{% endblock %}
+
+{% block content %}
+<div class="container my-4 rounded border p-0">
+    <div class="bg-{{ course.color }} text-light p-4 rounded-top">
+        <h2>Список поданих робіт</h2>
+    </div>
+    <div class="p-4">
+        {% if submissions %}
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Студент</th>
+                        <th>Посилання</th>
+                        <th>Дата здачі</th>
+                        <th>Оцінка</th>
+                        <th>Зберегти</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submission in submissions %}
+                    <tr class="align-middle">
+                        <td>
+                            {{ submission.student.user.get_full_name }}
+                        </td>
+                        <td>
+                            <a href="{{ submission.file_url }}" target="_blank" class="btn btn-outline-primary btn-sm">Відкрити</a>
+                        </td>
+                        <td>
+                            {{ submission.timestamp|date:"d E Y" }}
+                        </td>
+                        <td>
+                            <form method="post" class="d-flex align-items-center gap-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="submission_id" value="{{ submission.id }}">
+                                <input type="number" name="grade" value="{{ submission.grade }}" min="0" max="100" class="form-control" style="width: 100px;">
+                        </td>
+                        <td>
+                                <button type="submit" class="btn btn-success btn-sm">Зберегти</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>Жодної роботи ще не подано.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

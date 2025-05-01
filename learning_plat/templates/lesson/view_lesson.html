@@ -61,7 +61,7 @@
             {% if assignment %}
                 {% if user.is_staff %}
                 <div>
-                    <a href="" class="btn btn-{{ course.color }} w-100 text-center text-light">Переглянути завдання студентів</a>
+                    <a href="{% url 'submission_list' course.courseId lesson.id %}" class="btn btn-{{ course.color }} w-100 text-center text-light">Переглянути завдання студентів</a>
                 </div>
                 {% else %}
                     <form method="post" action="{% url 'submit' course.courseId lesson.id %}">
