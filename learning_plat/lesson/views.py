@@ -3,6 +3,8 @@ from django.contrib import messages
 from .models import Lesson
 from teacher.models import Course
 from assignment.models import Assignment
+from submission.models import Submission
+from accounts.models import Student
 
 
 def create_lesson(request, courseId):
@@ -52,10 +54,18 @@ def view_lesson(request, courseId, lessonId):
     except:
         pass
 
+    submission = None
+    try:
+        student = Student.objects.get(user = request.user)
+        submission = Submission.objects.get(assignment = assignment, student = student)
+    except:
+        pass
+
     context = {
         'course': course,
         'lesson': lesson,
-        'assignment': assignment
+        'assignment': assignment,
+        'submission': submission
     }
 
     return render(request, 'lesson/view_lesson.html', context)
