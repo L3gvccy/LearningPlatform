@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'course',
     'lesson',
     'assignment',
+    'submission',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
