@@ -70,3 +70,10 @@ def archive_course(request, courseId):
     course.save()    
 
     return redirect(f'/teacher/courses/{courseId}/')
+
+def delete_course(request, courseId):
+    course = Course.objects.get(courseId = courseId)
+    course.delete()
+    
+    messages.success(request, f'Курс { course.title } було видалено.')
+    return redirect('/teacher/courses/')
