@@ -40,10 +40,12 @@
                     <p class="h5">{{ assignment.title }}</p class="h5">
                     <p class="mb-2"><span class="fw-bold">Дата здачі:</span> {{ assignment.due_date|date:"d E Y" }}</p>
                     <p class="mb-2">{{ assignment.desc }}</p>
+                    {% if user.is_staff %}
                     <div>
                         <a href="{% url 'edit_assignment' course.courseId lesson.id %}" class="btn btn-secondary px-4">Редагувати завдання</a>
                         <a href="{% url 'delete_assignment' course.courseId lesson.id %}" class="btn btn-danger px-4">Видалити завдання</a>
                     </div>
+                    {% endif %}
                     {% else %}
                     <h4>Завдання</h4>
                         {% if user.is_staff %}
