@@ -57,7 +57,7 @@
                         " href="/student/my_courses/">Курси</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="#">Завдання</a>
+                        <a class="nav-link {% if request.path == '/student/my_assignments/' %} text-aquagreen fw-bold {% endif %}" href="{% url 'my_assignments' %}">Завдання</a>
                     </li>
                 </ul>
                 {% endif %}
