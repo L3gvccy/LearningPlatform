@@ -8,7 +8,15 @@
         <div class="col-md-5">
             <h1 class="display-4">Розумний майданчик для навчання <br><span class="text-cyan fw-normal">Learn<span class="text-aquagreen">X</span></span></h1>
             <p class="lead">Платформа, що об'єднує викладачів та студентів для ефективного навчання.</p>
-            <a href="" class="btn btn-outline-aquagreen rounded-pill px-5"><h4 class="mb-0">ПРИЄДНАТИСЬ</h4></a>
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <a href="{% url 'display_courses' %}" class="btn btn-outline-aquagreen rounded-pill px-5"><h4 class="mb-0">ДО КУРСІВ</h4></a>
+                {% else %}
+                <a href="{% url 'view_my_courses' %}" class="btn btn-outline-aquagreen rounded-pill px-5"><h4 class="mb-0">ДО КУРСІВ</h4></a>
+                {% endif %}
+            {% else %}
+                <a href="/account/register/" class="btn btn-outline-aquagreen rounded-pill px-5"><h4 class="mb-0">ПРИЄДНАТИСЬ</h4></a>
+            {% endif %}
         </div>
         <div class="col-md-5">
             <img src="{% static 'img/main.png' %}" alt="" class="img-fluid w-100">
