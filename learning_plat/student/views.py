@@ -2,6 +2,11 @@ from teacher.models import Course
 from accounts.models import Student
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from djongo.database import DatabaseError
+from lesson.models import Lesson
+from assignment.models import Assignment
+from submission.models import Submission
+from django.utils import timezone
 
 def connect_to_course(request):
     if request.method == 'POST':
@@ -59,3 +64,43 @@ def leave_course(request, courseId):
         messages.error(request, "Цей курс не знайдений у вашому списку.")
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def my_assignments(request):
+    
+    student = Student.objects.get(user=request.user)
+    now = timezone.now()
+
+    courses = Course.objects.filter(courseId__in=student.courses_id, isArchived__in=[False, None])
+    print(courses)
+
+    lessons = Lesson.objects.filter(course__in=courses)
+    print(lessons)
+
+    assignments = Assignment.objects.filter(lesson__in=lessons)
+    print(assignments)
+
+    submissions = Submission.objects.filter(student=student)
+    submitted_ids = set(submissions.values_list('assignment_id', flat=True))
+
+    completed = []
+    pending = []
+    missed = []
+
+    for assignment in assignments:
+        if assignment.id in submitted_ids:
+            completed.append(assignment)
+        elif assignment.due_date < now:
+            missed.append(assignment)
+        else:
+            pending.append(assignment)
+
+    pending = sorted(pending, key=lambda a: a.due_date)
+    missed = sorted(missed, key=lambda a: a.due_date)
+
+    context = {
+        'completed': completed,
+        'pending': pending,
+        'missed': missed
+    }
+
+    return render(request, 'student/my_assignments.html', context)

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Завдання{% endblock %}
+{% block content %}
+
+<style>
+    .underline-tabs .nav-tabs {
+border-bottom: 2px solid #e9ecef;
+}
+
+.underline-tabs .nav-link {
+border: none;
+border-bottom: 2px solid transparent;
+padding: 1rem 1.5rem;
+margin-bottom: -2px;
+font-weight: 500;
+color: #6c757d;
+transition: all 0.3s ease;
+}
+
+.underline-tabs .nav-link:hover {
+border-bottom-color: #04aef950;
+color: #04aef9;
+}
+
+.underline-tabs .nav-link.active {
+border-bottom-color: #04aef9;
+color: #04aef9;
+}
+
+/* Content Animation */
+.tab-pane.fade {
+transition: all 0.2s ease-out;
+}
+
+.tab-pane.fade.show {
+animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.lesson-hover {
+transition: .3s;
+}
+
+.lesson-hover:hover {
+background-color: #eeeeee;
+}
+</style>
+
+<div class="container p-4">
+    <div class="p-4 pb-0">
+        <div class="underline-tabs">
+            <ul class="nav nav-tabs" id="underlineTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab2" data-bs-toggle="tab" data-bs-target="#home2" type="button" role="tab">
+                                Виконані
+                            </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab2" data-bs-toggle="tab" data-bs-target="#profile2" type="button" role="tab">
+                                Не виконані
+                            </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab2" data-bs-toggle="tab" data-bs-target="#contact2" type="button" role="tab">
+                                Пропущен термін здачі
+                            </button>
+                </li>
+            </ul>
+            <div class="tab-content pt-4" id="underlineTabsContent">
+                <div class="tab-pane fade show active" id="home2" role="tabpanel">
+                {% for assignment in completed %}
+                    <a href="{% url 'view_lesson' assignment.lesson.course.courseId assignment.lesson.id %}" class="text-decoration-none">
+                        <div class="rounded border text-dark mb-4 lesson-hover">
+                            <h4 class="text-dark m-4 mb-1">{{ assignment.lesson.title }}</h4>
+                            <h5 class="text-dark mx-4 mb-1">{{ assignment.lesson.course.title }}</h5>
+                            <p class="mx-4 mb-1">
+                                <span class="fw-bold">Дата здачі: </span>
+                                {{ assignment.due_date|date:"d E Y" }}
+                            </p>
+                            <p class="mx-4 mb-4">
+                                <span class="text-success">Здано</span>
+                            </p>
+                        </div>
+                    </a>
+                {% empty %}
+                <h4 class="text-center">Виконаних завдань немає</h4>
+                {% endfor %}
+                </div>
+
+                <div class="tab-pane fade" id="profile2" role="tabpanel">
+                {% for assignment in pending %}
+                    <a href="{% url 'view_lesson' assignment.lesson.course.courseId assignment.lesson.id %}" class="text-decoration-none">
+                        <div class="rounded border text-dark mb-4 lesson-hover">
+                            <h4 class="text-dark m-4 mb-1">{{ assignment.lesson.title }}</h4>
+                            <h5 class="text-dark mx-4 mb-1">{{ assignment.lesson.course.title }}</h5>
+                            <p class="mx-4 mb-1">
+                                <span class="fw-bold">Дата здачі: </span>
+                                {{ assignment.due_date|date:"d E Y" }}
+                            </p>
+                            <p class="mx-4 mb-4">
+                                <span class="text-danger">Не здано</span>
+                            </p>
+                        </div>
+                    </a>
+                {% empty %}
+                <h4 class="text-center">Не виконаних завдань немає</h4>
+                {% endfor %}
+                </div>
+                
+                <div class="tab-pane fade" id="contact2" role="tabpanel">
+                {% for assignment in missed %}
+                    <a href="{% url 'view_lesson' assignment.lesson.course.courseId assignment.lesson.id %}" class="text-decoration-none">
+                        <div class="rounded border text-dark mb-4 lesson-hover">
+                            <h4 class="text-dark m-4 mb-1">{{ assignment.lesson.title }}</h4>
+                            <h5 class="text-dark mx-4 mb-1">{{ assignment.lesson.course.title }}</h5>
+                            <p class="mx-4 mb-1">
+                                <span class="fw-bold">Дата здачі: </span>
+                                {{ assignment.due_date|date:"d E Y" }}
+                            </p>
+                            <p class="mx-4 mb-4">
+                                <span class="text-danger">Пропщен термін здачі</span>
+                            </p>
+                        </div>
+                    </a>
+                {% empty %}
+                <h4 class="text-center">Пропущених завдань немає</h4>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
