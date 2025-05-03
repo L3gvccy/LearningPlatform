@@ -1,5 +1,5 @@
 from django.urls import path, include
-from teacher.views import create_course, display_courses
+from teacher.views import create_course, display_courses, my_assignments
 from course.views import view_course, edit_course, remove_student, archive_course, delete_course
 from lesson.views import create_lesson
 from assignment.views import create_assignment, edit_assignment, delete_assignment
@@ -26,6 +26,8 @@ urlpatterns = [
     path('courses/<str:courseId>/<str:lessonId>/create_assignment/', create_assignment, name='create_assignment'),
     path('courses/<str:courseId>/<str:lessonId>/edit_assignment/', edit_assignment, name='edit_assignment'),
     path('courses/<str:courseId>/<str:lessonId>/delete_assignment/', delete_assignment, name='delete_assignment'),
+    path('my_assignments/', my_assignments, name='my_assignments_teacher'),
+
     
     # Подані роботи (submission)
     path('courses/<str:courseId>/<str:lessonId>/submissions/', submission_list, name='submission_list'),
