@@ -38,7 +38,10 @@
                         <a class="nav-link {% if request.path == '/' %} text-aquagreen fw-bold {% endif %}" href="/">Головна</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link {% if request.path|slice:':17' == '/teacher/courses/' %} text-aquagreen fw-bold {% endif %}" href="/teacher/courses/">Курси</a>
+                        <a class="nav-link 
+                        {% if request.path|slice:':17' == '/teacher/courses/' %}text-aquagreen fw-bold {% endif %} 
+                        {% if request.path|slice:':18' == '/teacher/students/' %}text-aquagreen fw-bold {% endif %} 
+                        " href="/teacher/courses/">Курси</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a class="nav-link {% if request.path == '/teacher/my_assignments/' %} text-aquagreen fw-bold {% endif %}" href="{% url 'my_assignments_teacher' %}">Завдання</a>
