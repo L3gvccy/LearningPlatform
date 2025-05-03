@@ -62,4 +62,4 @@ def submission_list(request, courseId, lessonId):
     lesson = Lesson.objects.get(id=lessonId)
     assignment = Assignment.objects.get(lesson = lesson)
     submissions = Submission.objects.filter(assignment=assignment)
-    return render(request, 'submission/submission_list.html', {'submissions': submissions, 'course': course, 'title': title})
+    return render(request, 'submission/submission_list.html', {'submissions': submissions, 'course': course, 'title': title, 'lesson': lesson})
