@@ -4,6 +4,8 @@
 {% block content %}
 
 <div class="container py-4">
+    <a href="{% url 'view_course_teacher' course.courseId %}" class="text-decoration-none text-secondary">&larr; Назад до курсу</a>
+
     <div class="col-md-4 mx-auto rounded border p-3">
         <form method="post">
             {% csrf_token %}

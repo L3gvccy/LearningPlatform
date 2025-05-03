@@ -8,6 +8,9 @@ from accounts.models import Student
 
 
 def create_lesson(request, courseId):
+    course = Course.objects.get(
+        courseId = courseId
+    )
     if request.method == 'POST':
         title = request.POST['title']
         content = request.POST['content']
@@ -27,10 +30,6 @@ def create_lesson(request, courseId):
         if len(content) < 0:
             context['content_err'] = 'Опис не може бути пустим'
             return render(request, 'lesson/create_lesson.html', context)
-        
-        course = Course.objects.get(
-            courseId = courseId
-        )
 
         lesson = Lesson.objects.create(
             title = title,
@@ -43,7 +42,8 @@ def create_lesson(request, courseId):
 
         messages.success(request,'Урок створено!')
         return redirect(f'/teacher/courses/{courseId}/')
-    return render(request,'lesson/create_lesson.html')
+    
+    return render(request,'lesson/create_lesson.html', {'course': course})
 
 def view_lesson(request, courseId, lessonId):
     course = Course.objects.get(courseId = courseId)

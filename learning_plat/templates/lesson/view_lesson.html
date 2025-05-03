@@ -3,7 +3,11 @@
 {% block title %}{{ lesson.title }}{% endblock %}
 {% block content %}
 
-<div class="container my-4 rounded border p-0">
+<div class="container my-2">
+    <a href="{% url 'view_course_teacher' course.courseId %}" class="text-decoration-none text-secondary">&larr; Назад до курсу</a>
+</div>
+
+<div class="container my-4 mt-0 rounded border p-0">
     <div class="bg-{{ course.color }} text-light p-4 rounded-top">
         <h2 class="mb-0">{{ lesson.title }}</h2>
     </div>
