@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Активність{% endblock %}
+
+{% block content %}
+<div class="container my-4 rounded border p-0">
+    <div class="bg-dark text-light p-4 rounded-top">
+        <h2>Активність користувача: {{ student.get_full_name|default:student.username }}</h2>
+        <p class="mb-0">Останні дії на платформі</p>
+    </div>
+    <div class="p-4">
+        {% if activities %}
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Дата і час</th>
+                        <th>Дія</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activities %}
+                    <tr class="align-middle">
+                        <td>{{ activity.timestamp|date:"d.m.Y H:i" }}</td>
+                        <td>{{ activity.action }}</td>
+                        <td><code>{{ activity.path }}</code></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>Немає активності</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

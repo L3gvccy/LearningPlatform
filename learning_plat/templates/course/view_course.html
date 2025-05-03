@@ -156,8 +156,14 @@
                     {% for student in students %}
                         <div class="border-bottom text-dark mb-2 p-2 d-flex align-items-center justify-content-between">
                             <h5 class="text-dark">{{ student.user.get_full_name }}</h5>
-                            <a href="{% url 'remove_student' course.courseId student.id %}" onclick="return confirmMsg('Ви точно бажаєте видалити студента?')" class="btn btn-danger">Видалити</a>
-                        </div>
+                            <div>
+                                <a href="{% url 'remove_student' course.courseId student.id %}" 
+                                onclick="return confirmMsg('Ви точно бажаєте видалити студента?')" 
+                                class="btn btn-danger">Видалити</a>
+                                <a href="{% url 'student_activity' student.user.id %}" 
+                                class="btn btn-success ms-2">Активність</a>
+                            </div>
+                    </div>
                     {% endfor %}
                     {% else %}
                     <h4 class="mb-4">Жодного студента не знайдено</h4>
