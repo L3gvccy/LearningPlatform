@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect
 from lesson.models import Lesson
 from django.contrib import messages
+from teacher.models import Course
 from .models import Assignment
 
 def create_assignment(request, courseId, lessonId):
+    course = Course.objects.get(
+        courseId = courseId
+    )
+    lesson = Lesson.objects.get(
+        id = lessonId
+    )
     if request.method == 'POST':
         title = request.POST['title']
         desc = request.POST['content']
@@ -23,10 +30,6 @@ def create_assignment(request, courseId, lessonId):
             context['content_err'] = 'Опис не може бути пустим'
             return render(request, 'assignment/create_assignment.html', context)
         
-        lesson = Lesson.objects.get(
-            id = lessonId
-        )
-        
         assignment = Assignment.objects.create(
             title = title,
             lesson = lesson,
@@ -37,7 +40,7 @@ def create_assignment(request, courseId, lessonId):
 
         messages.success(request,'Завдання створено!')
         return redirect(f'/teacher/courses/{courseId}/{lessonId}/')
-    return render(request,'assignment/create_assignment.html')
+    return render(request,'assignment/create_assignment.html', {'course': course, 'lesson': lesson})
 
 def edit_assignment(request, courseId, lessonId):
     lesson = Lesson.objects.get(id = lessonId)
