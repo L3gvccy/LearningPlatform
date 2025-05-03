@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'lesson',
     'assignment',
     'submission',
+    'activitylogs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +140,6 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+MIDDLEWARE += ['activitylogs.middleware.StudentActivityMiddleware']
+
