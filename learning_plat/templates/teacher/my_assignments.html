@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Усі завдання{% endblock %}
+{% block content %}
+<div class="container my-4">
+    {% if assignments.count > 0 %}
+    <div class="rounded-top">
+        <h2 class="text-dark m-4 mb-1">Усі завдання</h2>
+    </div>
+    {% endif %}
+
+    <div class="p-4">
+        {% if assignments.count > 0 %}
+            {% for assignment in assignments %}
+            <a href="{% url 'view_lesson' assignment.lesson.course.courseId assignment.lesson.id %}" class="text-decoration-none">
+                <div class="rounded border text-dark mb-4 lesson-hover">
+                    <h4 class="text-dark m-4 mb-1">{{ assignment.lesson.title }}</h4>
+                    <h5 class="text-dark mx-4 mb-1">{{ assignment.lesson.course.title }}</h5>
+                    <p class="mx-4 mb-4">
+                        <span class="fw-bold">Дата здачі: </span>
+                        {{ assignment.due_date|date:"d E Y" }}
+                    </p>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h4 class="text-center mb-4">Жодних завдань не знайдено</h4>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+<style>
+.lesson-hover {
+    transition: .3s;
+}
+.lesson-hover:hover {
+    background-color: #eeeeee;
+}
+</style>
+{% endblock %}

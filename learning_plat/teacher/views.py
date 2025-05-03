@@ -3,6 +3,9 @@ import string
 import random
 from django.contrib import messages
 from .models import Course
+from lesson.models import Lesson
+from accounts.models import Student, User
+from assignment.models import Assignment
 
 # Create your views here.
 def generate_code():
@@ -60,3 +63,21 @@ def display_courses(request):
     }
 
     return render(request, 'teacher/display_courses.html', context)
+
+def my_assignments(request):
+    teacher = request.user
+
+    courses = Course.objects.filter(teacher=teacher, isArchived__in=[False, None])
+    print(courses)
+
+    lessons = Lesson.objects.filter(course__in=courses)
+    print(lessons)
+
+    assignments = Assignment.objects.filter(lesson__in=lessons).order_by('-lesson__createdAt')
+    print(assignments)
+
+    context = {
+        'assignments': assignments,
+    }
+
+    return render(request, 'teacher/my_assignments.html', context)
