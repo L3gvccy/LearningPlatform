@@ -33,6 +33,6 @@ urlpatterns = [
     # Подані роботи (submission)
     path('courses/<str:courseId>/<str:lessonId>/submissions/', submission_list, name='submission_list'),
     
-    path('students/<int:student_id>/activity/', student_activity, name='student_activity'),
+    path('students/<int:student_id>/<str:courseId>/activity/', student_activity, name='student_activity'),
 
 ]

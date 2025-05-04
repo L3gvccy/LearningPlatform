@@ -5,6 +5,7 @@ from lesson.models import Lesson
 from assignment.models import Assignment
 from accounts.models import Student
 from .models import Submission
+from activitylogs.views import log_activity
 
 def submit(request, courseId, lessonId):
     if request.method == 'POST':
@@ -20,6 +21,9 @@ def submit(request, courseId, lessonId):
             submission.grade = 0
             submission.file_url = file_url
             messages.success(request, 'Завдання успішно змінено!')
+
+            log_activity(student, course, f'Змінив завдання до уроку {lesson.title}')
+
         else:
             submission = Submission.objects.create(
                 file_url = file_url,
@@ -28,11 +32,14 @@ def submit(request, courseId, lessonId):
                 assignment = assignment
             )
             messages.success(request, 'Завдання успішно прикріплено!')
+
+            log_activity(student, course, f'Прикріпив завдання до уроку {lesson.title}')
         
         submission.save()
         return redirect('view_lesson', courseId=courseId, lessonId=lessonId)
     
 def delete_submission(request, courseId, lessonId):
+    course = Course.objects.get(courseId = courseId)
     lesson = Lesson.objects.get(id = lessonId)
     assignment = Assignment.objects.get(lesson = lesson)
     student = Student.objects.get(user = request.user)
@@ -40,6 +47,9 @@ def delete_submission(request, courseId, lessonId):
     submission.delete()
 
     messages.success(request, 'Прикріплене завдання успішно видалене!')
+
+    log_activity(student, course, f'Видалив прикріплене завдання до уроку {lesson.title}')
+
     return redirect('view_lesson', courseId=courseId, lessonId=lessonId)
 
 def submission_list(request, courseId, lessonId):
