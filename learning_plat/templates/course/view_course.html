@@ -14,7 +14,11 @@
 <div class="container my-4 mt-0 rounded border p-0">
     <div class="bg-{{ course.color }} text-light p-4 rounded-top">
         <h2>{{ course.title }}</h2>
+        {% if course.isArchived %}
+        <p class="text-light mb-0"><span class="fw-bold">Курс архівовано</span></p>
+        {% else %}
         <p class="text-light mb-0"><span class="fw-bold">Код курсу:</span> {{ course.courseId }}</p>
+        {% endif %}
     </div>
     {% if user.is_staff %}
         <div class="border-bottom px-4 py-2">

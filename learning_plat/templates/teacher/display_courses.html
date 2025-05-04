@@ -15,8 +15,13 @@
                             <a href="{% url 'view_course_teacher' course.courseId %}" class="text-decoration-none"><h4 class="text-light mb-0">{{ course.title }}</h4></a>
                         </div>
                         <div class="p-3" style="height: 148px;">
+                            {% if course.isArchived %}
+                            <p class="mb-2"><span class="fw-bold">Курс архівовано</span></p>
+                            <p>{{ course.desc }}</p>
+                            {% else %}
                             <p class="mb-2"><span class="fw-bold">Код курсу:</span> {{ course.courseId }}</p>
                             <p>{{ course.desc }}</p>
+                            {% endif %}
                         </div>
                         <div class="mx-3 mb-3">
                             <a href="{% url 'delete_course' course.courseId %}" class="btn btn-outline-danger w-100 mb-2" onclick="return confirmMsg('Ви точно бажаєте видалити курс?');">Видалити курс</a>
