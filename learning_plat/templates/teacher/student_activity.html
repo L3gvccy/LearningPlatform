@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container my-4 rounded border p-0">
     <div class="bg-dark text-light p-4 rounded-top">
-        <h2>Активність користувача: {{ student.get_full_name|default:student.username }}</h2>
+        <h2>Активність користувача: {{ student.user.get_full_name|default:student.user.username }}</h2>
         <p class="mb-0">Останні дії на платформі</p>
     </div>
     <div class="p-4">
@@ -16,7 +16,7 @@
                     <tr>
                         <th>Дата і час</th>
                         <th>Дія</th>
-                        <th>URL</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                     <tr class="align-middle">
                         <td>{{ activity.timestamp|date:"d.m.Y H:i" }}</td>
                         <td>{{ activity.action }}</td>
-                        <td><code>{{ activity.path }}</code></td>
+
                     </tr>
                     {% endfor %}
                 </tbody>

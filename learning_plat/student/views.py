@@ -6,6 +6,7 @@ from djongo.database import DatabaseError
 from lesson.models import Lesson
 from assignment.models import Assignment
 from submission.models import Submission
+from activitylogs.views import log_activity
 from django.utils import timezone
 
 def connect_to_course(request):
@@ -26,6 +27,8 @@ def connect_to_course(request):
         
         student.courses_id.append(course.courseId)
         student.save()
+
+        log_activity(student, course, f'Приєднався до курсу {course.title}')
 
         messages.success(request, f'Ви успішно підключились до курсу: {course.title}')
         return redirect(request.META.get('HTTP_REFERER', '/'))

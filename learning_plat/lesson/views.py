@@ -5,6 +5,7 @@ from teacher.models import Course
 from assignment.models import Assignment
 from submission.models import Submission
 from accounts.models import Student
+from activitylogs.views import log_activity
 
 
 def create_lesson(request, courseId):
@@ -67,6 +68,10 @@ def view_lesson(request, courseId, lessonId):
         'assignment': assignment,
         'submission': submission
     }
+
+    if Student.objects.filter(user = request.user).exists():
+        student = Student.objects.get(user = request.user)
+        log_activity(student, course, f'Переглядав урок {lesson.title}')
 
     return render(request, 'lesson/view_lesson.html', context)
 

@@ -141,5 +141,3 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_USER_MODEL = 'accounts.User'
 
-MIDDLEWARE += ['activitylogs.middleware.StudentActivityMiddleware']
-

@@ -168,7 +168,7 @@
                                 <a href="{% url 'remove_student' course.courseId student.id %}" 
                                 onclick="return confirmMsg('Ви точно бажаєте видалити студента?')" 
                                 class="btn btn-danger">Видалити</a>
-                                <a href="{% url 'student_activity' student.user.id %}" 
+                                <a href="{% url 'student_activity' student.user.id course.courseId %}" 
                                 class="btn btn-success ms-2">Активність</a>
                             </div>
                     </div>
